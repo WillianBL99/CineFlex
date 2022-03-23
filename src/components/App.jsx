@@ -9,9 +9,9 @@ import api from "../services/api"
 import Filme from '../assets/img/filme.jpg'
 
 export default function App() {
-    const [items, setItems] = useState([])
+    const [movies, setMovies] = useState([])
 
-    api.get('').then(answer => setItems(answer.data))
+    api.get('').then(answer => setMovies(answer.data))
 
     return (
         <>
@@ -21,32 +21,18 @@ export default function App() {
             <main>
                 <h2>Selecione o filme</h2>
                 <section>
-                    <article>
-                        <img src={Filme} alt="filme" />
-                    </article>
-                    <article>
-                        <img src={Filme} alt="filme" />
-                    </article>
-                    <article>
-                        <img src={Filme} alt="filme" />
-                    </article>
-                    <article>
-                        <img src={Filme} alt="filme" />
-                    </article>
-                    <article>
-                        <img src={Filme} alt="filme" />
-                    </article>
-                    <article>
-                        <img src={Filme} alt="filme" />
-                    </article>
-                    <article>
-                        <img src={Filme} alt="filme" />
-                    </article>
-                    <article>
-                        <img src={Filme} alt="filme" />
-                    </article>
+                    {movies.map(movie => <Movie img={movie.posterURL} alt={movie.title} />)}
                 </section>
             </main>
         </>
+    )
+}
+
+
+function Movie({ img, alt}) {
+    return (
+        <article>
+            <img src={img} alt={alt} />
+        </article>
     )
 }
