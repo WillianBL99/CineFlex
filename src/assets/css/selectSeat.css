@@ -1,0 +1,111 @@
+main.select-seat {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 0 25px;
+
+}
+
+main.select-seat h2 {
+    padding: 2rem 0;
+
+    font-size: var(--font-subtitle);
+    color: var(--color-fonte);
+}
+
+main.select-seat .seats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.seats div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 2rem;
+    height: 2rem;
+
+    margin: 8px 4px;
+
+    border-radius: 50%;
+    border: 1px solid #808F9D;
+
+    background: var(--color-available);
+}
+
+main.select-seat .identifiers {
+    display: flex;
+    justify-content: space-evenly;
+
+    width: 100%;
+    margin-bottom: 45px;
+}
+
+.identifiers div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.identifiers div div {
+    width: 2rem;
+    height: 2rem;
+
+    margin: 8px 4px;
+
+    border-radius: 50%;
+    border: 1px solid #808F9D;  
+}
+
+.identifiers .selected {
+    background: var(--color-selected);
+}
+
+.identifiers .available {
+    background: var(--color-available);
+}
+
+.identifiers .unavailable {
+    background: var(--color-unavailable);
+}
+
+main.select-seat .user-data {
+    width: 100%;
+}
+
+main.select-seat p {
+    font-size: var(--font-p);
+}
+
+main.select-seat input {
+    width: 100%;
+    height: 2.8rem;
+
+    padding-left: 8px;
+    margin-top: 3px;
+    margin-bottom: 15px;
+
+    border: 1px solid #D5D5D5;
+    border-radius: 3px;
+}
+
+main.select-seat button {
+    position: absolute;
+    
+    margin: 0 auto;
+
+    bottom: 25px;
+
+    padding: 0.8rem 2rem;
+    margin-right: 8px;
+
+    border: none;
+    border-radius: 3px;
+
+    background-color: var(--color-button);
+    color: #fff;
+}

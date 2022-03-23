@@ -7,7 +7,7 @@ main.movies {
 }
 
 main.movies h2 {
-    padding: 1.3rem 0;
+    padding: 2rem 0;
 
     font-size: var(--font-subtitle);
     color: var(--color-fonte);
