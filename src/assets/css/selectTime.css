@@ -1,0 +1,46 @@
+main.select-time {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+main.select-time h2 {
+    padding: 2rem 0;
+
+    font-size: var(--font-subtitle);
+    color: var(--color-fonte);
+}
+
+main.select-time section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    width: 90%
+}
+
+main.select-time article {
+    margin-bottom: 40px;
+}
+
+main.select-time p {
+    margin-bottom: 25px;
+
+    font-size: var(--font-p);
+    color: var(--color-fonte);
+}
+
+main.select-time button {
+    width: 5rem;
+    height: 2rem;
+
+    margin-right: 8px;
+
+    border: none;
+    border-radius: 3px;
+
+    background-color: var(--color-button);
+    color: #fff;
+}

@@ -1,0 +1,32 @@
+footer {
+    display: flex;
+    align-items: center;
+    
+    position: absolute;    
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    padding: 8px;
+
+    background-color: var(--color-footer);
+}
+
+footer .border {
+    background-color: white;
+}
+
+footer img {
+    object-fit: cover;
+    object-position: center;
+
+    height: 7.5rem;
+
+    margin: 8px;
+}
+
+footer p {
+    margin-left: 20px;
+    font-size: var(--font-subtitle);
+    font-family: var(--font);
+}

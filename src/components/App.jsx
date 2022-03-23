@@ -1,38 +1,23 @@
-import React, { useState } from "react"
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+import Header from "./Header"
+import Movies from "./Movies"
+import SelectTime from "./SelectTime"
 
 import '../assets/css/reset.css'
 import '../assets/css/main.css'
 
-import axios from "axios"
-import api from "../services/api"
-
-import Filme from '../assets/img/filme.jpg'
-
 export default function App() {
-    const [movies, setMovies] = useState([])
-
-    api.get('').then(answer => setMovies(answer.data))
 
     return (
-        <>
-            <header>
-                CINEFEX
-            </header>
-            <main>
-                <h2>Selecione o filme</h2>
-                <section>
-                    {movies.map(movie => <Movie img={movie.posterURL} alt={movie.title} />)}
-                </section>
-            </main>
-        </>
+        <BrowserRouter>
+            <Header />
+            <Routes>
+                <Route path='/' element={<Movies />} />
+                <Route path='/selecttime' element={<SelectTime />} />
+            </Routes>
+        </BrowserRouter>
     )
 }
 
 
-function Movie({ img, alt}) {
-    return (
-        <article>
-            <img src={img} alt={alt} />
-        </article>
-    )
-}
