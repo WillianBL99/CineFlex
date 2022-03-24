@@ -57,6 +57,7 @@ function Seat({ seat: { id, name, isAvailable }, selecteds, setSelecteds }) {
 
             setSelected(!selected)
         }
+        else alert('Assento indisponível')
 
     }
 

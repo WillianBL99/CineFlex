@@ -27,6 +27,8 @@ main.select-seat .seats {
     justify-content: center;
     align-items: center;
 
+    cursor: pointer;
+
     width: 2rem;
     height: 2rem;
 
