@@ -61,16 +61,16 @@ main.select-seat .identifiers {
     border: 1px solid #808F9D;  
 }
 
-.identifiers .selected {
-    background: var(--color-selected);
+div.selected {
+    background-color: var(--color-selected);
 }
 
-.identifiers .available {
-    background: var(--color-available);
+div.available {
+    background-color: var(--color-available);
 }
 
-.identifiers .unavailable {
-    background: var(--color-unavailable);
+div.unavailable {
+    background-color: var(--color-unavailable);
 }
 
 main.select-seat .user-data {

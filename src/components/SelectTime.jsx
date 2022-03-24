@@ -12,7 +12,7 @@ export default function SelectTime() {
     const [movieData, setMovieData] = useState({ days: [] })
 
     useEffect(() => {
-        api.get(`/${idMovie}/showtimes`)
+        api.get(`/movies/${idMovie}/showtimes`)
             .then(answer => setMovieData(answer.data))
             .catch(error => console.log(error))
     }, [])

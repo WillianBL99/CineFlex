@@ -11,7 +11,7 @@ export default function Movies() {
 
     useEffect(() => {
         api
-            .get('').then(answer => setMovies(answer.data))
+            .get('/movies').then(answer => setMovies(answer.data))
             .catch(error => console.log(error))
     }, [])
 
