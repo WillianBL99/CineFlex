@@ -7,6 +7,7 @@ import Header from "./Header"
 import Movies from "./Movies"
 import SelectTime from "./SelectTime"
 import SelectSeat from './SelectSeat'
+import Success from './Success'
 
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
                 <Route path='/' element={<Movies />} />
                 <Route path='/filme/:idMovie' element={<SelectTime />} />
                 <Route path='/sessao/:idSection' element={<SelectSeat />} />
+                <Route path='/sucesso' element={<Success />} />
             </Routes>
         </BrowserRouter>
     )
