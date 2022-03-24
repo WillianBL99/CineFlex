@@ -9,7 +9,7 @@ import Footer from './Footer'
 
 export default function SelectTime() {
     const { idMovie } = useParams()
-    const [movieData, setMovieData] = useState({days:[]})
+    const [movieData, setMovieData] = useState({ days: [] })
 
     useEffect(() => {
         api.get(`/${idMovie}/showtimes`)
@@ -17,7 +17,7 @@ export default function SelectTime() {
             .catch(error => console.log(error))
     }, [])
 
-    const {posterURL:img,title} = movieData
+    const { posterURL: img, title } = movieData
 
     console.log(movieData)
 
@@ -25,8 +25,10 @@ export default function SelectTime() {
         <>
             <main className='select-time'>
                 <h2>Selecione o horário</h2>
-                <section>                
-                   {movieData.days.map(day => <Time info={day} />)}
+                <section>
+                    <div className="scroll">
+                        {movieData.days.map(day => <Time info={day} />)}
+                    </div>
                 </section>
             </main>
             <Footer img={img} title={title} />
@@ -35,7 +37,7 @@ export default function SelectTime() {
 }
 
 
-function Time({info:{weekday,date,showtimes}}) {
+function Time({ info: { weekday, date, showtimes } }) {
 
     return (
         <article>
