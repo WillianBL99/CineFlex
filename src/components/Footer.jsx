@@ -1,14 +1,12 @@
 import '../assets/css/footer.css'
 
-import Filme from '../assets/img/filme.jpg'
-
-export default function Footer() {
+export default function Footer({img, title}) {
     return (
         <footer>
             <div className="border">
-                <img src={Filme} alt="" />
+                <img src={img} alt={title} />
             </div>
-            <p>Enola Holmes</p>
+            <p>{title}</p>
         </footer>
     )
 }

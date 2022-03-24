@@ -9,24 +9,27 @@ import Footer from './Footer'
 
 export default function SelectTime() {
     const { idMovie } = useParams()
-    const [daysMovie, setDaysMovie] = useState([])
+    const [movieData, setMovieData] = useState({days:[]})
 
     useEffect(() => {
         api.get(`/${idMovie}/showtimes`)
-            .then(answer => setDaysMovie(answer.data.days))
+            .then(answer => setMovieData(answer.data))
             .catch(error => console.log(error))
     }, [])
 
+    const {posterURL:img,title} = movieData
+
+    console.log(movieData)
 
     return (
         <>
             <main className='select-time'>
                 <h2>Selecione o horário</h2>
                 <section>                
-                   {daysMovie.map(day => {console.log(day); return <Time info={day} />} )}
+                   {movieData.days.map(day => <Time info={day} />)}
                 </section>
             </main>
-            <Footer />
+            <Footer img={img} title={title} />
         </>
     )
 }
