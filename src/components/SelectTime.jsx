@@ -1,7 +1,7 @@
 import '../assets/css/selectTime.css'
 
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import api from '../services/api'
 
 import Footer from './Footer'
@@ -43,7 +43,7 @@ function Time({ info: { weekday, date, showtimes } }) {
         <article>
             <p>{weekday} - {date}</p>
             <div>
-                {showtimes.map(time => <button>{time.name}</button>)}
+                {showtimes.map(time => <Link to={`/sessao/${time.id}`} ><button>{time.name}</button></Link>)}
             </div>
         </article>
     )
