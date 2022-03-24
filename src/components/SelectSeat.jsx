@@ -9,12 +9,21 @@ export default function SelectSeat() {
     const { idSection } = useParams()
     const [dataSection, setDataSection] = useState({ seats: [] })
     const [seatsSelected, setSeatsSelected] = useState([])
+    const [userData, setUserData] = useState({ cpf: '', name: '' })
 
     useEffect(() => {
         api.get(`/showtimes/${idSection}/seats`)
             .then(answer => setDataSection(answer.data))
             .catch(error => console.error(error))
     }, [])
+
+    function postReserver(obj) {
+        if (obj.ids.length > 0 && obj.name && obj.cpf) {
+            api.post(`/seats/book-many`, obj)
+                .catch(error => console.error('deu ruim', error))
+
+        } else alert('Preencha tudo corretamente')
+    }
 
     return (
         <main className="select-seat">
@@ -31,12 +40,18 @@ export default function SelectSeat() {
 
             <sectio className="user-data">
                 <p>Nome do comprador:</p>
-                <input type="text" placeholder="Digite seu nome..." />
+                <input onBlur={({ target: { value } }) => setUserData({ ...userData, name: value })} type="text" placeholder="Digite seu nome..." />
                 <p>CPF do comprador:</p>
-                <input type="number" placeholder="Digite seu CPF..." />
+                <input onBlur={({ target: { value } }) => setUserData({ ...userData, cpf: value })} type="number" placeholder="Digite seu CPF..." />
             </sectio>
 
-            <Link to={'/sucesso'} ><button>Reservar assento(s)</button></Link>
+            <Link
+                to={`${(seatsSelected.length > 0 && userData.name && userData.cpf) ? '/sucesso' : ''}`}
+            >
+                <button onClick={() => postReserver(
+                    { ids: seatsSelected, name: userData.name, cpf: userData.cpf }
+                )}>Reservar assento(s)</button>
+            </Link>
         </main>
     )
 }
@@ -52,7 +67,7 @@ function Seat({ seat: { id, name, isAvailable }, selecteds, setSelecteds }) {
             else {
                 const index = selecteds.indexOf(id)
 
-                setSelecteds([...selecteds.slice(0, index),...selecteds.splice(index + 1)])
+                setSelecteds([...selecteds.slice(0, index), ...selecteds.splice(index + 1)])
             }
 
             setSelected(!selected)
