@@ -4,6 +4,8 @@ main.movies {
     flex-direction: column;
     align-items: center;
 
+    overflow-y: auto;
+
 }
 
 main.movies h2 {

@@ -37,4 +37,16 @@ header {
 
 body{
     margin: none;
+    height: calc(100vh - 3.5rem);
+}
+
+.root{
+    display: flex;
+    flex-direction: column;
+
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+
+    overflow-y: hidden;
 }
