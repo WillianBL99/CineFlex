@@ -14,12 +14,10 @@ export default function SelectTime() {
     useEffect(() => {
         api.get(`/movies/${idMovie}/showtimes`)
             .then(answer => setMovieData(answer.data))
-            .catch(error => console.log(error))
+            .catch(error => console.error(error))
     }, [])
 
     const { posterURL: img, title } = movieData
-
-    console.log(movieData)
 
     return (
         <>

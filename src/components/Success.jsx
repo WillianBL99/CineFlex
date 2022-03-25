@@ -1,10 +1,8 @@
 import '../assets/css/success.css'
 
 import { Link } from 'react-router-dom'
-//"{\"ids\":[52,53],\"name\":\"Paulo Uilian\",\"cpf\":\"12354\"}
 
 export default function Success({ticketData}) {
-    console.log(ticketData)
         const {ticket, day, name, movie} = ticketData
     return ticket.ids.length?
     (
