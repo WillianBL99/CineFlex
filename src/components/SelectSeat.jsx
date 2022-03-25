@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import api from '../services/api'
 
-export default function SelectSeat() {
+export default function SelectSeat({ setTicketData }) {
 
     const { idSection } = useParams()
     const [dataSection, setDataSection] = useState({ seats: [] })
@@ -18,8 +18,14 @@ export default function SelectSeat() {
     }, [])
 
     function postReserver(obj) {
+        const { name, day, movie } = dataSection
+
         if (obj.ids.length > 0 && obj.name && obj.cpf) {
             api.post(`/seats/book-many`, obj)
+                .then(answer => {
+                    const ticket = JSON.parse(answer.config.data)
+                    setTicketData({ticket:ticket, name:name, day:day, movie:movie })
+                })
                 .catch(error => console.error('deu ruim', error))
 
         } else alert('Preencha tudo corretamente')
