@@ -8,14 +8,14 @@ import Footer from './Footer'
 export default function SelectSeat({ setTicketData }) {
 
     const { idSection } = useParams()
-    const [dataSection, setDataSection] = useState({ seats: [], footer:false })
+    const [dataSection, setDataSection] = useState({ seats: [], footer: false })
     console.log(dataSection)
     const [seatsSelected, setSeatsSelected] = useState([])
     const [userData, setUserData] = useState({ cpf: '', name: '' })
 
     useEffect(() => {
         api.get(`/showtimes/${idSection}/seats`)
-            .then(answer => setDataSection({...answer.data, footer:true}))
+            .then(answer => setDataSection({ ...answer.data, footer: true }))
             .catch(error => console.error(error))
     }, [])
 
@@ -37,37 +37,41 @@ export default function SelectSeat({ setTicketData }) {
         <>
             <main className="select-seat">
                 <h2>Selecione o(s) assento(s)</h2>
-                <div className="seats">
-                    {dataSection.seats.map(seat => <Seat seat={seat} selecteds={seatsSelected} setSelecteds={setSeatsSelected} />)}
-                </div>
+                <section>
+                    <div className="scroll">
+                        <div className="seats">
+                            {dataSection.seats.map(seat => <Seat seat={seat} selecteds={seatsSelected} setSelecteds={setSeatsSelected} />)}
+                        </div>
 
-                <div className="identifiers">
-                    <div><div className="selected"></div><p>Selecionado</p></div>
-                    <div><div className="available"></div><p>Disponível</p></div>
-                    <div><div className="unavailable"></div><p>Indisponível</p></div>
-                </div>
+                        <div className="identifiers">
+                            <div><div className="selected"></div><p>Selecionado</p></div>
+                            <div><div className="available"></div><p>Disponível</p></div>
+                            <div><div className="unavailable"></div><p>Indisponível</p></div>
+                        </div>
 
-                <sectio className="user-data">
-                    <p>Nome do comprador:</p>
-                    <input onBlur={({ target: { value } }) => setUserData({ ...userData, name: value })} type="text" placeholder="Digite seu nome..." />
-                    <p>CPF do comprador:</p>
-                    <input onBlur={({ target: { value } }) => setUserData({ ...userData, cpf: value })} type="number" placeholder="Digite seu CPF..." />
-                </sectio>
-
-                <Link
-                    to={`${(seatsSelected.length > 0 && userData.name && userData.cpf) ? '/sucesso' : ''}`}
-                >
-                    <button onClick={() => postReserver(
-                        { ids: seatsSelected, name: userData.name, cpf: userData.cpf }
-                    )}>Reservar assento(s)</button>
-                </Link>
-                {dataSection.footer?<Footer
-                    img={dataSection.movie.posterURL}
-                    title={dataSection.movie.title}
-                    subTitle={`${dataSection.day.weekday} - ${dataSection.day.date}`}
-                />:<></>}
+                        <sectio className="user-data">
+                            <p>Nome do comprador:</p>
+                            <input onBlur={({ target: { value } }) => setUserData({ ...userData, name: value })} type="text" placeholder="Digite seu nome..." />
+                            <p>CPF do comprador:</p>
+                            <input onBlur={({ target: { value } }) => setUserData({ ...userData, cpf: value })} type="number" placeholder="Digite seu CPF..." />
+                        </sectio>
+                        <Link
+                            to={`${(seatsSelected.length > 0 && userData.name && userData.cpf) ? '/sucesso' : ''}`}
+                        >
+                            <button onClick={() => postReserver(
+                                { ids: seatsSelected, name: userData.name, cpf: userData.cpf }
+                            )}>Reservar assento(s)</button>
+                        </Link>
+                    </div>
+                </section>
 
             </main>
+
+            {dataSection.footer ? <Footer
+                img={dataSection.movie.posterURL}
+                title={dataSection.movie.title}
+                subTitle={`${dataSection.day.weekday} - ${dataSection.day.date}`}
+            /> : <></>}
         </>
     )
 }
