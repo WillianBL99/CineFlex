@@ -27,7 +27,7 @@ main.success section {
 }
 
 main.success article {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 main.success strong {
@@ -41,6 +41,7 @@ main.success strong {
 main.success p {
     font-size: var(--font-p);
     color: var(--color-fonte);
+    margin-bottom: 4px;
 }
 
 main.success span {
