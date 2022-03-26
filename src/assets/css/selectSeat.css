@@ -9,8 +9,7 @@ main.select-seat {
 }
 
 main.select-seat h2 {
-    padding: 2rem 0;
-
+    margin: 20px;
     font-size: var(--font-subtitle);
     color: var(--color-fonte);
 }
@@ -19,16 +18,14 @@ main.select-seat > section {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    
+    width: 100%;
 
     overflow-y: hidden;
     
-    width: 100%;
 }
 
 main.select-seat .scroll{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     width: 100%;
     padding: 0 20px;
 
