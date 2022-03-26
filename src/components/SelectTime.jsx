@@ -16,7 +16,7 @@ export default function SelectTime() {
             .catch(error => console.error(error))
     }, [])
 
-    const { posterURL: img, title } = movieData
+    const { posterURL: img, title, overview } = movieData
 
     return (
         <>
@@ -28,7 +28,7 @@ export default function SelectTime() {
                     </Scroll>
                 </section>
             </Main>
-            <Footer img={img} title={title} />
+            <Footer img={img} title={title} subTitle={overview} />
         </>
     )
 }
@@ -86,6 +86,7 @@ const Scroll = styled.div`
 
     width: 100%;
     padding-inline: var(--padding-inline-scroll);
+    padding-bottom: 200px;
 
     overflow-y: auto;
 `
