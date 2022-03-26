@@ -66,6 +66,10 @@ const Footer_ST = styled.footer`
     .subtitle {
         font-size: var(--font-p);
         overflow-y: auto;
+
+        height: 75%;
+
+        padding-bottom: 20px;
     }
 `
 
