@@ -4,6 +4,9 @@
     box-sizing: border-box;
 
     font-family: var(--font);
+
+    --padding-inline-main: 2px;
+    --prop-img: 2.8;
     
     --color-header: #C3CFD9;
     --color-footer: #DFE6ED;
@@ -20,12 +23,42 @@
     --font-p: 1.2rem;
 }
 
-@media (min-width: 700px) {
-    main {
-        margin-inline: auto;
-        max-width: 600px;
+@media (min-width: 350px) {
+    *{
+        --prop-img: 1.3;
     }
-    
+}
+
+@media (min-width: 550px) {
+    *{
+        --padding-inline-main: 20px;
+    }
+}
+
+@media (min-width: 700px) {
+    *{
+        --prop-img: 0.8;
+        --padding-inline-main: 20px;
+    }
+}
+
+@media (min-width: 800px) {
+    *{
+        --prop-img: 0.8;
+    }
+}
+
+@media (min-width: 800px) {
+    *{
+        --prop-img: 0.5;
+    }
+}
+
+@media (min-width: 1300px) {
+    *{
+        --prop-img: 0.5;
+        --padding-inline-main: 40px
+    }
 }
 
 header {
