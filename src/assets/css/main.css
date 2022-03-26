@@ -9,6 +9,7 @@
     --padding-inline-scroll: 10px;
     --prop-img: 2.8;
     --prop-times: 2.8;
+    --size-seats: 1;
     
     --color-header: #C3CFD9;
     --color-footer: #DFE6ED;
@@ -37,6 +38,7 @@
     *{
         --padding-inline-scroll: 50px;
         --padding-inline-main: 20px;
+        --size-seats: 0.9;
     }
 }
 
@@ -51,6 +53,7 @@
 @media (min-width: 800px) {
     *{
         --prop-img: 0.8;
+        --size-seats: 0.7;
     }
 }
 
@@ -64,6 +67,7 @@
     *{
         --padding-inline-scroll: 20px;
         --prop-times: 0.7;
+        --size-seats: 0.6;
     }
 }
 
@@ -72,6 +76,7 @@
         --padding-inline-main: 40px;
         --prop-img: 0.5;
         --prop-times: 2.8;
+        --size-seats: 0.4;
     }
 }
 

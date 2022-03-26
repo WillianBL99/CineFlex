@@ -1,15 +1,15 @@
-import '../assets/css/selectSeat.css'
-
+import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import api from '../services/api'
+
 import Footer from './Footer'
+import Seat from './Seat'
 
 export default function SelectSeat({ setTicketData }) {
 
     const { idSection } = useParams()
     const [dataSection, setDataSection] = useState({ seats: [], footer: false })
-    console.log(dataSection)
     const [seatsSelected, setSeatsSelected] = useState([])
     const [userData, setUserData] = useState({ cpf: '', name: '' })
 
@@ -35,10 +35,10 @@ export default function SelectSeat({ setTicketData }) {
 
     return (
         <>
-            <main className="select-seat">
+            <Main>
                 <h2>Selecione o(s) assento(s)</h2>
                 <section>
-                    <div className="scroll">
+                    <Scroll>
                         <div className="seats">
                             {dataSection.seats.map(seat => <Seat seat={seat} selecteds={seatsSelected} setSelecteds={setSeatsSelected} />)}
                         </div>
@@ -55,17 +55,19 @@ export default function SelectSeat({ setTicketData }) {
                             <p>CPF do comprador:</p>
                             <input onBlur={({ target: { value } }) => setUserData({ ...userData, cpf: value })} type="number" placeholder="Digite seu CPF..." />
                         </sectio>
-                        <Link
-                            to={`${(seatsSelected.length > 0 && userData.name && userData.cpf) ? '/sucesso' : ''}`}
-                        >
-                            <button onClick={() => postReserver(
-                                { ids: seatsSelected, name: userData.name, cpf: userData.cpf }
-                            )}>Reservar assento(s)</button>
-                        </Link>
-                    </div>
+                        <div className="button">
+                            <Link
+                                to={`${(seatsSelected.length > 0 && userData.name && userData.cpf) ? '/sucesso' : ''}`}
+                            >
+                                <button onClick={() => postReserver(
+                                    { ids: seatsSelected, name: userData.name, cpf: userData.cpf }
+                                )}>Reservar assento(s)</button>
+                            </Link>
+                        </div>
+                    </Scroll>
                 </section>
 
-            </main>
+            </Main>
 
             {dataSection.footer ? <Footer
                 img={dataSection.movie.posterURL}
@@ -76,33 +78,152 @@ export default function SelectSeat({ setTicketData }) {
     )
 }
 
-function Seat({ seat: { id, name, isAvailable }, selecteds, setSelecteds }) {
-    const [selected, setSelected] = useState(false)
 
-    function verifySelected() {
+const Main = styled.main`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
 
-        if (isAvailable) {
-            if (!selected) setSelecteds([...selecteds, id])
+    overflow-y: hidden;
+    
+    h2 {
+        
+        text-align: center;
 
-            else {
-                const index = selecteds.indexOf(id)
+        width: 100%;
+        padding-block: 15px;
 
-                setSelecteds([...selecteds.slice(0, index), ...selecteds.splice(index + 1)])
-            }
+        font-size: var(--font-subtitle);
+        color: var(--color-fonte);
 
-            setSelected(!selected)
-        }
-        else alert('Assento indisponível')
-
+        background-color: rgba(0,0,0,0.01);
     }
 
-    return (
-        <div
-            key={id}
-            onClick={verifySelected}
-            className={`seat ${!isAvailable ? 'unavailable' : selected ? 'selected' : ''}`}
-        >
-            {name}
-        </div>
-    )
-}
+    & > section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        width: 100%;
+
+        overflow-y: hidden;
+        
+    }
+`
+
+const Scroll = styled.div`
+    
+    width: 100%;
+    padding-inline: var(--padding-inline-scroll);
+    
+    padding-top: 5px;
+    padding-bottom: 200px;
+
+    overflow-y: auto;
+
+    .seats {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+
+        width: calc(100vw * 0.9 * var(--size-seats));
+        height: calc(100vw * 0.45 * var(--size-seats));
+
+        margin-inline: auto;
+
+        justify-content: center;
+    }
+
+    .seats div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        cursor: pointer;
+
+        width: 80%;
+        height: 80%;
+
+        border-radius: 50%;
+        border: 1px solid #808F9D;
+
+        background: var(--color-available);
+    }
+
+    .identifiers {
+        display: flex;
+        justify-content: space-evenly;
+
+        width: 100%;
+        margin-bottom: 45px;
+    }
+
+    .identifiers div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .identifiers div div {
+        width: calc(100vw * 0.06 * var(--size-seats));
+        height: calc(100vw * 0.06 * var(--size-seats));
+
+        margin: 8px 4px;
+
+        border-radius: 50%;
+        border: 1px solid #808F9D;  
+    }
+
+    div.selected {
+        background-color: var(--color-selected);
+    }
+
+    div.available {
+        background-color: var(--color-available);
+    }
+
+    div.unavailable {
+        background-color: var(--color-unavailable);
+    }
+
+    .user-data {
+        width: 100%;
+    }
+
+    p {
+        font-size: var(--font-p);
+    }
+
+    input {
+        width: 100%;
+        height: 2.8rem;
+
+        padding-left: 8px;
+        margin-top: 3px;
+        margin-bottom: 15px;
+
+        border: 1px solid #D5D5D5;
+        border-radius: 3px;
+    }
+
+    .button {
+        display: flex;
+        justify-content: center;
+    }
+
+    button {
+
+        bottom: 25px;
+
+        padding: 0.8rem 2rem;
+        margin-bottom: 10px;
+
+        border: none;
+        border-radius: 3px;
+
+        background-color: var(--color-button);
+        color: #fff;
+    }
+`
+
