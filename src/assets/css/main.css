@@ -61,21 +61,6 @@
     }
 }
 
-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 100%;
-    height: 3.5rem;
-
-    font-family: 'Roboto', sans-serif;
-    font-size: var(--font-title);
-
-    color: var(--color-button);
-    background-color: var(--color-header);
-}
-
 body{
     margin: none;
     height: calc(100vh - 3.5rem);
