@@ -36,7 +36,7 @@ export default function SelectSeat({ setTicketData }) {
     return (
         <>
             <Main>
-                <h2>Selecione o(s) assento(s)</h2>
+                <h2>Assentos</h2>
                 <section>
                     <Scroll>
                         <div className="seats">
@@ -148,12 +148,14 @@ const Scroll = styled.div`
         border-radius: 50%;
         border: 1px solid #808F9D;
 
+        font-size: 100%;
+
         background: var(--color-available);
     }
 
     .identifiers {
         display: flex;
-        justify-content: space-evenly;
+        justify-content: center;
 
         width: 100%;
         margin-bottom: 45px;
@@ -173,6 +175,11 @@ const Scroll = styled.div`
 
         border-radius: 50%;
         border: 1px solid #808F9D;  
+    }
+
+    .identifiers p {
+        margin-inline: 10px;
+        font-size: 0.8rem;
     }
 
     div.selected {
