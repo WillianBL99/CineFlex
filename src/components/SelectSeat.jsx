@@ -50,10 +50,10 @@ export default function SelectSeat({ setTicketData }) {
                         </div>
 
                         <sectio className="user-data">
-                            <p>Nome do comprador:</p>
-                            <input onBlur={({ target: { value } }) => setUserData({ ...userData, name: value })} type="text" placeholder="Digite seu nome..." />
-                            <p>CPF do comprador:</p>
-                            <input onBlur={({ target: { value } }) => setUserData({ ...userData, cpf: value })} type="number" placeholder="Digite seu CPF..." />
+                            <label htmlFor="name">Nome do comprador:</label>
+                            <input id='name' onBlur={({ target: { value } }) => setUserData({ ...userData, name: value })} type="text" placeholder="Digite seu nome..." />
+                            <label htmlFor="cpf">CPF do comprador:</label>
+                            <input id='cpf' onBlur={({ target: { value } }) => setUserData({ ...userData, cpf: value })} type="number" placeholder="Digite seu CPF..." />
                         </sectio>
                         <div className="button">
                             <Link
