@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import api from '../services/api'
 
 import Footer from './Footer'
-import Seat from './Seat'
+import Seats from './Seats'
 
 export default function SelectSeat({ setTicketData }) {
 
@@ -22,21 +22,22 @@ export default function SelectSeat({ setTicketData }) {
 
     function postReserver(event) {
         event.preventDefault()
-        console.log('chamou',event)
         const { name, day, movie } = dataSection
+        const obj = { ids: seatsSelected, name: userData.name, cpf: userData.cpf }
 
-        console.log('length',seatsSelected.length)
-        if(seatsSelected.length === 0){
+        if (seatsSelected.length === 0) {
             alert('Nenhuma poltrona selecinada')
 
         } else {
-            api.post(`/seats/book-many`, { ids: seatsSelected, name: userData.name, cpf: userData.cpf })
-                .then(answer => {
-                    const ticket = JSON.parse(answer.config.data)
-                    setTicketData({ ticket: ticket, name: name, day: day, movie: movie })
-                    setTimeout(() => {navigate('/sucesso')}, 50);
-                })
-                .catch(error => console.error('deu ruim', error))
+            const promise = api.post(`/seats/book-many`, obj)
+
+            promise.then(answer => {
+                const ticket = JSON.parse(answer.config.data)
+                setTicketData({ ticket: ticket, name: name, day: day, movie: movie })
+                setTimeout(() => { navigate('/sucesso') }, 50);
+            })
+
+            promise.catch(error => console.error('deu ruim', error))
         }
     }
 
@@ -46,15 +47,7 @@ export default function SelectSeat({ setTicketData }) {
                 <h2>Assentos</h2>
                 <section>
                     <Scroll>
-                        <div className="seats">
-                            {dataSection.seats.map(seat => <Seat seat={seat} selecteds={seatsSelected} setSelecteds={setSeatsSelected} />)}
-                        </div>
-
-                        <div className="identifiers">
-                            <div><div className="selected"></div><p>Selecionado</p></div>
-                            <div><div className="available"></div><p>Disponível</p></div>
-                            <div><div className="unavailable"></div><p>Indisponível</p></div>
-                        </div>
+                        <Seats seats={dataSection.seats} selecteds={seatsSelected} setSelecteds={setSeatsSelected} />
 
                         <form onSubmit={postReserver}>
                             <sectio className="user-data">
@@ -67,7 +60,6 @@ export default function SelectSeat({ setTicketData }) {
                         </form>
                     </Scroll>
                 </section>
-
             </Main>
 
             {dataSection.footer ? <Footer
@@ -123,78 +115,6 @@ const Scroll = styled.div`
 
     overflow-y: auto;
 
-    .seats {
-        display: grid;
-        grid-template-columns: repeat(10, 1fr);
-        grid-template-rows: repeat(5, 1fr);
-
-        width: calc(100vw * 0.9 * var(--size-seats));
-        height: calc(100vw * 0.45 * var(--size-seats));
-
-        margin-inline: auto;
-
-        justify-content: center;
-    }
-
-    .seats div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        cursor: pointer;
-
-        width: 80%;
-        height: 80%;
-
-        border-radius: 50%;
-        border: 1px solid #808F9D;
-
-        font-size: 100%;
-
-        background: var(--color-available);
-    }
-
-    .identifiers {
-        display: flex;
-        justify-content: center;
-
-        width: 100%;
-        margin-bottom: 45px;
-    }
-
-    .identifiers div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .identifiers div div {
-        width: calc(100vw * 0.06 * var(--size-seats));
-        height: calc(100vw * 0.06 * var(--size-seats));
-
-        margin: 8px 4px;
-
-        border-radius: 50%;
-        border: 1px solid #808F9D;  
-    }
-
-    .identifiers p {
-        margin-inline: 10px;
-        font-size: 0.8rem;
-    }
-
-    div.selected {
-        background-color: var(--color-selected);
-    }
-
-    div.available {
-        background-color: var(--color-available);
-    }
-
-    div.unavailable {
-        background-color: var(--color-unavailable);
-    }
-
     .user-data {
         width: 100%;
     }
@@ -232,6 +152,18 @@ const Scroll = styled.div`
 
         background-color: var(--color-button);
         color: #fff;
+    }
+
+    div.selected {
+        background-color: var(--color-selected);
+    }
+
+    div.available {
+        background-color: var(--color-available);
+    }
+
+    div.unavailable {
+        background-color: var(--color-unavailable);
     }
 `
 
