@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import api from '../services/api'
 
 import Footer from './Footer'
@@ -8,6 +8,7 @@ import Seat from './Seat'
 
 export default function SelectSeat({ setTicketData }) {
 
+    const navigate = useNavigate();
     const { idSection } = useParams()
     const [dataSection, setDataSection] = useState({ seats: [], footer: false })
     const [seatsSelected, setSeatsSelected] = useState([])
@@ -19,18 +20,24 @@ export default function SelectSeat({ setTicketData }) {
             .catch(error => console.error(error))
     }, [])
 
-    function postReserver(obj) {
+    function postReserver(event) {
+        event.preventDefault()
+        console.log('chamou',event)
         const { name, day, movie } = dataSection
 
-        if (obj.ids.length > 0 && obj.name && obj.cpf) {
-            api.post(`/seats/book-many`, obj)
+        console.log('length',seatsSelected.length)
+        if(seatsSelected.length === 0){
+            alert('Nenhuma poltrona selecinada')
+
+        } else {
+            api.post(`/seats/book-many`, { ids: seatsSelected, name: userData.name, cpf: userData.cpf })
                 .then(answer => {
                     const ticket = JSON.parse(answer.config.data)
                     setTicketData({ ticket: ticket, name: name, day: day, movie: movie })
+                    setTimeout(() => {navigate('/sucesso')}, 50);
                 })
                 .catch(error => console.error('deu ruim', error))
-
-        } else alert('Preencha tudo corretamente')
+        }
     }
 
     return (
@@ -49,21 +56,15 @@ export default function SelectSeat({ setTicketData }) {
                             <div><div className="unavailable"></div><p>Indisponível</p></div>
                         </div>
 
-                        <sectio className="user-data">
-                            <label htmlFor="name">Nome do comprador:</label>
-                            <input id='name' onBlur={({ target: { value } }) => setUserData({ ...userData, name: value })} type="text" placeholder="Digite seu nome..." />
-                            <label htmlFor="cpf">CPF do comprador:</label>
-                            <input id='cpf' onBlur={({ target: { value } }) => setUserData({ ...userData, cpf: value })} type="number" placeholder="Digite seu CPF..." />
-                        </sectio>
-                        <div className="button">
-                            <Link
-                                to={`${(seatsSelected.length > 0 && userData.name && userData.cpf) ? '/sucesso' : ''}`}
-                            >
-                                <button onClick={() => postReserver(
-                                    { ids: seatsSelected, name: userData.name, cpf: userData.cpf }
-                                )}>Reservar assento(s)</button>
-                            </Link>
-                        </div>
+                        <form onSubmit={postReserver}>
+                            <sectio className="user-data">
+                                <label htmlFor="name">Nome do comprador:</label>
+                                <input id='name' onBlur={({ target: { value } }) => setUserData({ ...userData, name: value })} type="text" placeholder="Digite seu nome..." required />
+                                <label htmlFor="cpf">CPF do comprador:</label>
+                                <input id='cpf' onBlur={({ target: { value } }) => setUserData({ ...userData, cpf: value })} type="number" placeholder="Digite seu CPF..." required />
+                            </sectio>
+                            <button type='submit'>Reservar</button>
+                        </form>
                     </Scroll>
                 </section>
 
@@ -198,7 +199,7 @@ const Scroll = styled.div`
         width: 100%;
     }
 
-    p {
+    label {
         font-size: var(--font-p);
     }
 
