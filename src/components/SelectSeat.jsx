@@ -49,6 +49,20 @@ export default function SelectSeat({ setTicketData }) {
                     <Scroll>
                         <Seats seats={dataSection.seats} selecteds={seatsSelected} setSelecteds={setSeatsSelected} />
 
+                        <Tickets>
+                            <div>2</div>
+                            <div>2</div>
+                            <div>2</div>
+                            <div>2</div>
+                            <div>2</div>
+                            <div>2</div>
+                            <div>2</div>
+                            <div>2</div>
+                            <div>2</div>
+                            <div>2</div>
+                            <div>2</div>
+                        </Tickets>
+
                         <form onSubmit={postReserver}>
                             <sectio className="user-data">
                                 <label htmlFor="name">Nome do comprador:</label>
@@ -71,6 +85,32 @@ export default function SelectSeat({ setTicketData }) {
     )
 }
 
+
+const Tickets = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+    height: 80px;
+
+    margin-block: 5px;
+
+    overflow-x: scroll;
+
+    div {
+        min-width: 3rem;
+        height: 4rem;
+        margin: 5px;
+        padding: 2px;
+        border: 1px solid #808F9D;
+        
+        text-align: center;
+        
+        background-color: var(--color-unavailable);
+        box-shadow: 0 0 10px -2px rgba(0,0,0,0.3);
+    }
+`
 
 const Main = styled.main`
     display: flex;
@@ -166,4 +206,3 @@ const Scroll = styled.div`
         background-color: var(--color-unavailable);
     }
 `
-
