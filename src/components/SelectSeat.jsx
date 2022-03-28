@@ -5,6 +5,7 @@ import api from '../services/api'
 
 import Footer from './Footer'
 import Seats from './Seats'
+import Ticket from './Ticket'
 
 export default function SelectSeat({ setTicketData }) {
 
@@ -49,20 +50,10 @@ export default function SelectSeat({ setTicketData }) {
                     <Scroll>
                         <Seats seats={dataSection.seats} selecteds={seatsSelected} setSelecteds={setSeatsSelected} />
 
-                        <Tickets>
-                            <div>2</div>
-                            <div>2</div>
-                            <div>2</div>
-                            <div>2</div>
-                            <div>2</div>
-                            <div>2</div>
-                            <div>2</div>
-                            <div>2</div>
-                            <div>2</div>
-                            <div>2</div>
-                            <div>2</div>
+                        {/* <Tickets>
+                            {seatsSelected.map(num => <Ticket num={num} />)}
                         </Tickets>
-
+ */}
                         <form onSubmit={postReserver}>
                             <sectio className="user-data">
                                 <label htmlFor="name">Nome do comprador:</label>
