@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import api from "../services/api"
 
+import Header from "./Header"
+
 
 export default function Movies() {
 
@@ -15,16 +17,19 @@ export default function Movies() {
     }, [])
 
     return (
-        <Main>
-            <h2>Selecione o filme</h2>
-            <section>
-                {movies.map(({ id, posterURL, title }) =>
-                    <Link to={`/filme/${id}`}>
-                        <Movie key={id + posterURL} img={posterURL} alt={title} />
-                    </Link>)
-                }
-            </section>
-        </Main>
+        <>
+            <Header />
+            <Main>
+                <h2>Selecione o filme</h2>
+                <section>
+                    {movies.map(({ id, posterURL, title }) =>
+                        <Link to={`/filme/${id}`}>
+                            <Movie key={id + posterURL} img={posterURL} alt={title} />
+                        </Link>)
+                    }
+                </section>
+            </Main>
+        </>
     )
 }
 
@@ -59,7 +64,7 @@ const Main = styled.main`
         justify-content: center;
     }   
 `
-const  Article = styled.article`
+const Article = styled.article`
     padding: 10px;
     margin: 5px;
 

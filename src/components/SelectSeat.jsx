@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import api from '../services/api'
 
+import Header from './Header'
 import Footer from './Footer'
 import Seats from './Seats'
 import Ticket from './Ticket'
@@ -44,6 +45,7 @@ export default function SelectSeat({ setTicketData }) {
 
     return (
         <>
+            <Header link={`/filme/${idSection}`} />
             <Main>
                 <h2>Assentos</h2>
                 <section>

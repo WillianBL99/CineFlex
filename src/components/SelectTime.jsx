@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import api from '../services/api'
 
+import Header from './Header'
 import Footer from './Footer'
 
 
@@ -20,6 +21,7 @@ export default function SelectTime() {
 
     return (
         <>
+            <Header link={'/'} />
             <Main>
                 <h2>Selecione o horário</h2>
                 <section>

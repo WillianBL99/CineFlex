@@ -17,7 +17,6 @@ export default function App() {
 
     return (
         <BrowserRouter>
-            <Header />
             <Routes>
                 <Route path='/' element={<Movies />} />
                 <Route path='/filme/:idMovie' element={<SelectTime />} />
