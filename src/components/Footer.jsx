@@ -1,9 +1,8 @@
 import styled from 'styled-components'
 
 export default function Footer({ img, title, subTitle }) {
-    console.log('subtitle', subTitle)
     return (
-        <Footer_ST img={img}>
+        <FooterST img={img}>
             <Background />
             <div className="border">
                 <img src={img} alt={title} />
@@ -13,11 +12,11 @@ export default function Footer({ img, title, subTitle }) {
                 {subTitle ? <p className='subtitle'>{subTitle}</p> : <></>}
             </div>
 
-        </Footer_ST>
+        </FooterST>
     )
 }
 
-const Footer_ST = styled.footer`
+const FooterST = styled.footer`
     display: flex;
     align-items: center;
 

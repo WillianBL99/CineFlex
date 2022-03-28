@@ -4,7 +4,6 @@ import '../assets/css/main.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useState } from 'react'
 
-import Header from "./Header"
 import Movies from "./Movies"
 import SelectTime from "./SelectTime"
 import SelectSeat from './SelectSeat'

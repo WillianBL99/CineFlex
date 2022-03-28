@@ -5,14 +5,14 @@ export default function Header({link=''}) {
     const navigate = useNavigate()
 
     return (
-        <Header_STY>
+        <HeaderST>
             {link=== ''?<></>:<button onClick={()=> navigate(`${link}`)}>Voltar</button>}
             CINEFLEX
-        </Header_STY>
+        </HeaderST>
     )
 }
 
-const Header_STY = styled.header`
+const HeaderST = styled.header`
     display: flex;
     justify-content: center;
     align-items: center;
