@@ -52,17 +52,23 @@ export default function SelectSeat({ setTicketData }) {
                     <Scroll>
                         <Seats seats={dataSection.seats} selecteds={seatsSelected} setSelecteds={setSeatsSelected} />
 
-                        {/* <Tickets>
-                            {seatsSelected.map(num => <Ticket num={num} />)}
+                        <Tickets>{seatsSelected.map(num => {
+                            { console.log(num) }
+                            return <Ticket num={num} />
+                        })}
                         </Tickets>
- */}
                         <form onSubmit={postReserver}>
-                            <sectio className="user-data">
-                                <label htmlFor="name">Nome do comprador:</label>
-                                <input id='name' onBlur={({ target: { value } }) => setUserData({ ...userData, name: value })} type="text" placeholder="Digite seu nome..." required />
-                                <label htmlFor="cpf">CPF do comprador:</label>
-                                <input id='cpf' onBlur={({ target: { value } }) => setUserData({ ...userData, cpf: value })} type="number" placeholder="Digite seu CPF..." required />
-                            </sectio>
+                            {
+                                seatsSelected.map(num => {
+                                    return <sectio id={num} className="user-data">
+                                        <label htmlFor="name">Nome do comprador:</label>
+                                        <input id='name' onBlur={({ target: { value } }) => setUserData({ ...userData, name: value })} type="text" placeholder="Digite seu nome..." required />
+                                        <label htmlFor="cpf">CPF do comprador:</label>
+                                        <input id='cpf' onBlur={({ target: { value } }) => setUserData({ ...userData, cpf: value })} type="number" placeholder="Digite seu CPF..." required />
+                                        <hr />
+                                    </sectio>
+                                })
+                            }
                             <button type='submit'>Reservar</button>
                         </form>
                     </Scroll>
@@ -78,7 +84,6 @@ export default function SelectSeat({ setTicketData }) {
     )
 }
 
-
 const Tickets = styled.div`
     display: flex;
     justify-content: flex-start;
@@ -91,7 +96,7 @@ const Tickets = styled.div`
 
     overflow-x: scroll;
 
-    div {
+    a {
         min-width: 3rem;
         height: 4rem;
         margin: 5px;
@@ -99,9 +104,11 @@ const Tickets = styled.div`
         border: 1px solid #808F9D;
         
         text-align: center;
+        text-decoration: none;
         
         background-color: var(--color-unavailable);
         box-shadow: 0 0 10px -2px rgba(0,0,0,0.3);
+        color: var(--color-font);
     }
 `
 
@@ -135,6 +142,12 @@ const Main = styled.main`
 
         overflow-y: hidden;
         
+    }
+
+    section.user-data {
+        
+        background-color: blue;
+        border-bottom: solid 1px var(--color-fonte);
     }
 `
 
